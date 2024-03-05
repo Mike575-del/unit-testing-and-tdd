@@ -35,4 +35,8 @@ public class SavingAccount implements Account {
     public void setBalance(double balance){
         this.amount = balance;
     }
+
+    public String getAccountReport() {
+        return "### acc " + id + ": " + amount;
+    }
 }
