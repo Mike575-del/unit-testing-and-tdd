@@ -65,10 +65,23 @@ public class ReportingTest {
 
     @Test
     public void shouldReturnAccountsBalancesForAllBranchAccounts(){
+        int branchId = 1;
+        String expectedReport = "### acc 1: 100.0";
+        Reporting sut = new Reporting(branchRepo);
 
+        Branch stubBranch = mock(Branch.class);
+
+        SavingAccount accountMock = mock(SavingAccount.class); //Нужно мокать или можно подставить реальный аккаунт коли на него тесты уже есть?
+        ArrayList<Account> accountsDummy = new ArrayList<>();
+        accountsDummy.add(accountMock);
+
+        when(accountMock.getId()).thenReturn(1);
+        when(accountMock.getAmount()).thenReturn(100d);
+        when(stubBranch.getAccounts()).thenReturn(accountsDummy);
+        when(branchRepo.getBranchById(branchId)).thenReturn(Optional.of(stubBranch));
+
+        assertTrue(sut.getReport(branchId).contains(expectedReport));
     }
-
-
 
 
 

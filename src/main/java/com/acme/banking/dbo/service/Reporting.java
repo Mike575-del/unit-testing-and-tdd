@@ -19,6 +19,7 @@ public class Reporting {
 
     }
     public String getReport(int branchId) {
+        String report = "";
 
         Optional<Branch> optionalRootBranch = branchRepo.getBranchById(branchId);
 
@@ -33,8 +34,11 @@ public class Reporting {
         }
 
         if(rootBranch.getChildren().isEmpty()){
-            return "" + "Branch " + branchId + "doesn't have children";
+            return report + "Branch " + branchId + "doesn't have children";
         }
+
+        return rootBranch.getReport();
+
 
         return "";
     }

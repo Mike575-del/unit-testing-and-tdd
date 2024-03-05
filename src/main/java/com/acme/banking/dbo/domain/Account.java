@@ -5,4 +5,5 @@ public interface Account {
     double getAmount();
     Client getClient(); //TODO reference integrity
     void setBalance(double balance);
+    String getAccountReport();
 }
