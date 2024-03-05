@@ -31,6 +31,11 @@ public class Reporting {
         if(rootBranch.getAccounts().isEmpty()) {
             return "";
         }
-        return null;
+
+        if(rootBranch.getChildren().isEmpty()){
+            return "" + "Branch " + branchId + "doesn't have children";
+        }
+
+        return "";
     }
 }

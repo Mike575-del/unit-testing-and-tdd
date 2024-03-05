@@ -1,6 +1,8 @@
 package com.acme.banking.dbo.service;
 
+import com.acme.banking.dbo.domain.Account;
 import com.acme.banking.dbo.domain.Branch;
+import com.acme.banking.dbo.domain.SavingAccount;
 import com.acme.banking.dbo.repo.BranchRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,6 +46,25 @@ public class ReportingTest {
 
     @Test
     public void shouldReturnInfoAboutEmptyChildrenThenBranchDontHaveChildren() {
+        int testBranchId = 1;
+        String expected = "Branch " + testBranchId + "doesn't have children";
+
+        Branch stubBranch = mock(Branch.class);
+        SavingAccount accountDummy = mock(SavingAccount.class);
+
+        ArrayList<Account> accountsDummy = new ArrayList<>();
+        accountsDummy.add(accountDummy);
+
+        when(stubBranch.getAccounts()).thenReturn(accountsDummy);
+        when(branchRepo.getBranchById(testBranchId)).thenReturn(Optional.of(stubBranch));
+
+        Reporting sut = new Reporting(branchRepo);
+        assertTrue(sut.getReport(testBranchId).contains(expected));
+        //Branch stubBranch = mock(Branch.class);
+    }
+
+    @Test
+    public void shouldReturnAccountsBalancesForAllBranchAccounts(){
 
     }
 
